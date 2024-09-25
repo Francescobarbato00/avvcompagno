@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function AboutSection() {
   return (
-    <section className="py-12 sm:py-16">
+    <section className="py-12 sm:py-16 bg-white">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
         {/* Colonna Sinistra - Testo */}
         <div className="md:w-1/2 p-4 sm:p-6">

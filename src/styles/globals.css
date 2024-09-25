@@ -2,29 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Definizione dei colori di base */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+/* Rimuovi il tema scuro o lascia la possibilità di attivarlo a tua scelta */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Se vuoi mantenere i colori chiari anche in modalità dark, commenta questa sezione */
+    /* --background: #0a0a0a;
+    --foreground: #ededed; */
   }
 }
 
+/* Impostazioni globali */
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Utilità personalizzate */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
+/* Animazione */
 @keyframes scroll {
   0% {
     transform: translateX(0);
