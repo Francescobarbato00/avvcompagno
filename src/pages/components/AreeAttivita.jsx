@@ -36,6 +36,38 @@ export default function AreeAttivita() {
             </a>
             <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600"></div>
           </div>
+
+          <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
+              Scopri di più <span className="ml-2">&rsaquo;</span>
+            </a>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600"></div>
+          </div>
+
+          <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
+              Scopri di più <span className="ml-2">&rsaquo;</span>
+            </a>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600"></div>
+          </div>
+
+          <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
+              Scopri di più <span className="ml-2">&rsaquo;</span>
+            </a>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600"></div>
+          </div>
+
+          <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
+              Scopri di più <span className="ml-2">&rsaquo;</span>
+            </a>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600"></div>
+          </div>
           
           {/* Puoi aggiungere tutte le altre card con lo stesso pattern */}
         </div>
