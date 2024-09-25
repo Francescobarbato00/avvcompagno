@@ -1,6 +1,6 @@
 import React from "react";
 
-// Creiamo 12 articoli per 4 righe
+// Articoli di esempio
 const articles = [
   {
     title: "Novità giurisprudenziali in tema di Rottamazione",
@@ -20,7 +20,6 @@ const articles = [
       "Le principali novità sono: 1. per accedere al concordato, è necessario non avere debiti tributari...",
     date: "13 Settembre 2024",
   },
-  // Aggiungiamo articoli aggiuntivi per riempire 4 righe
   {
     title: "Aggiornamento fiscale 2024",
     description:
@@ -95,15 +94,15 @@ const ArticleSection = () => {
 const styles = {
   gridContainer: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)', // Tre articoli per fila
+    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', // Adatta le colonne automaticamente
     gridGap: '20px', // Spaziatura tra le card
-    padding: '40px',
+    padding: '20px', // Padding ridotto su mobile
   },
   card: {
     backgroundColor: '#fff',
     padding: '20px',
     boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-    borderRadius: '0px', // Bordi quadrati
+    borderRadius: '5px',
     border: '1px solid #e6e6e6',
     textAlign: 'left',
     transition: 'box-shadow 0.3s ease',
@@ -116,19 +115,19 @@ const styles = {
     marginBottom: '10px',
   },
   title: {
-    fontSize: '22px',
+    fontSize: '20px', // Riduzione della dimensione del titolo
     margin: '10px 0',
     fontWeight: '600',
     lineHeight: '1.4',
   },
   description: {
-    fontSize: '16px',
+    fontSize: '14px', // Riduzione della dimensione della descrizione
     margin: '10px 0',
     color: '#333',
     lineHeight: '1.6',
   },
   date: {
-    fontSize: '14px',
+    fontSize: '12px', // Riduzione della dimensione della data
     color: '#888',
     marginTop: '10px',
   },
