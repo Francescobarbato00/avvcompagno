@@ -2,8 +2,8 @@ export default function TeamSection() {
   return (
     <section className="py-12 sm:py-16 bg-white">
       <div className="container mx-auto px-4 flex flex-col lg:flex-row justify-between">
-        {/* Colonna Sinistra - Testo Scrollabile con effetto sticky */}
-        <div className="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8 sticky top-4 self-start">
+        {/* Colonna Sinistra - Testo Scrollabile con effetto sticky solo su lg */} 
+        <div className="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8 lg:sticky lg:top-4 self-start">
           <h2 className="text-red-600 uppercase text-sm mb-2">I Professionisti</h2>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
             Il nostro team
