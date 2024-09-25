@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,25 +46,11 @@ export default function Chatbot() {
     }, 2000); // Simula un tempo di attesa per la risposta del bot
   };
 
-  // Simulazione dell'effetto di digitazione del bot
-  const simulateTypingEffect = (text, callback) => {
-    let index = 0;
-    let typingMessage = "";
-    const interval = setInterval(() => {
-      typingMessage += text[index];
-      index++;
-      if (index === text.length) {
-        clearInterval(interval);
-        callback(typingMessage);
-      }
-    }, 50); // Aggiunge un carattere ogni 50ms
-  };
-
   return (
     <div>
       {/* Icona del chatbot */}
       <div
-        className="fixed bottom-8 right-8 bg-red-600 text-white rounded-full p-4 shadow-lg cursor-pointer z-50"
+        className="fixed bottom-8 right-8 md:bottom-4 md:right-4 bg-red-600 text-white rounded-full p-4 shadow-lg cursor-pointer z-50"
         onClick={toggleChat}
       >
         <svg
@@ -85,7 +71,7 @@ export default function Chatbot() {
 
       {/* Finestra del chatbot */}
       {isOpen && (
-        <div className="fixed bottom-20 right-8 w-96 bg-white rounded-lg shadow-lg z-50">
+        <div className="fixed bottom-20 right-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50">
           <div className="p-4 border-b">
             <div className="flex justify-between items-center">
               <h2 className="text-lg font-bold">Assistente Virtuale</h2>
@@ -96,7 +82,7 @@ export default function Chatbot() {
           </div>
 
           <div className="p-4">
-            <div className="h-64 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll"> {/* Ingrandita */}
+            <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll">
               {/* Visualizzazione dei messaggi */}
               {messages.map((message, index) => (
                 <div key={index} className={`mb-2 ${message.sender === "user" ? "text-right" : ""}`}>
@@ -118,12 +104,12 @@ export default function Chatbot() {
             <input
               type="text"
               placeholder="Scrivi un messaggio..."
-              className="w-full p-2 border rounded-lg mb-2"
+              className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-red-600"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
             />
             <button
-              className="bg-red-600 text-white w-full py-2 rounded-lg"
+              className="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700 transition-colors"
               onClick={handleSendMessage}
             >
               Invia
