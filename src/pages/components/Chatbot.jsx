@@ -71,7 +71,10 @@ export default function Chatbot() {
 
       {/* Finestra del chatbot */}
       {isOpen && (
-        <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50 mx-4">
+        <div
+          className="fixed bottom-20 right-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50 transform translate-x-0"
+          style={{ left: "auto", right: "4px" }} // aggiustamento per mobile
+        >
           <div className="p-4 border-b">
             <div className="flex justify-between items-center">
               <h2 className="text-lg font-bold">Assistente Virtuale</h2>
@@ -89,7 +92,9 @@ export default function Chatbot() {
                   <p className={`text-gray-700 ${message.sender === "bot" ? "text-left" : "text-right"}`}>
                     {message.text}
                   </p>
-                  <p className="text-xs text-gray-500">{message.time}</p>
+                  <p className="text-xs text-gray-500">
+                    {message.time}
+                  </p>
                 </div>
               ))}
               {isTyping && (
@@ -115,6 +120,19 @@ export default function Chatbot() {
           </div>
         </div>
       )}
+      {/* Responsive CSS */}
+      <style jsx>{`
+        @media (max-width: 640px) {
+          div.fixed {
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+            margin: 0 auto;
+            max-width: 100%;
+          }
+        }
+      `}</style>
     </div>
   );
 }
