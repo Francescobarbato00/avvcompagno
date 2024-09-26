@@ -14,7 +14,7 @@ export default function Chatbot() {
   // Funzione per ottenere l'orario attuale in formato HH:MM
   const getCurrentTime = () => {
     const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
 
   // Funzione per aggiungere il messaggio dell'utente e la risposta del bot
@@ -72,13 +72,16 @@ export default function Chatbot() {
       {/* Finestra del chatbot */}
       {isOpen && (
         <div
-          className="fixed bottom-20 right-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50 transform translate-x-0"
-          style={{ left: "auto", right: "4px" }} // aggiustamento per mobile
+          className="fixed bottom-20 right-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50"
+          style={{ left: "auto", right: "4px" }} // Desktop, chat in basso a destra
         >
           <div className="p-4 border-b">
             <div className="flex justify-between items-center">
               <h2 className="text-lg font-bold">Assistente Virtuale</h2>
-              <button onClick={toggleChat} className="text-gray-400 hover:text-gray-600">
+              <button
+                onClick={toggleChat}
+                className="text-gray-400 hover:text-gray-600"
+              >
                 ✖
               </button>
             </div>
@@ -88,13 +91,18 @@ export default function Chatbot() {
             <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll">
               {/* Visualizzazione dei messaggi */}
               {messages.map((message, index) => (
-                <div key={index} className={`mb-2 ${message.sender === "user" ? "text-right" : ""}`}>
-                  <p className={`text-gray-700 ${message.sender === "bot" ? "text-left" : "text-right"}`}>
+                <div
+                  key={index}
+                  className={`mb-2 ${message.sender === "user" ? "text-right" : ""}`}
+                >
+                  <p
+                    className={`text-gray-700 ${
+                      message.sender === "bot" ? "text-left" : "text-right"
+                    }`}
+                  >
                     {message.text}
                   </p>
-                  <p className="text-xs text-gray-500">
-                    {message.time}
-                  </p>
+                  <p className="text-xs text-gray-500">{message.time}</p>
                 </div>
               ))}
               {isTyping && (
@@ -124,12 +132,14 @@ export default function Chatbot() {
       <style jsx>{`
         @media (max-width: 640px) {
           div.fixed {
+            right: 4px; /* Mantieni il pulsante tondo in basso a destra */
+          }
+          div.fixed + div { /* Finestra del chatbot quando aperta */
             bottom: 0;
-            right: 0;
             left: 0;
-            width: 100%;
+            right: 0;
+            max-width: 95%; /* Impedisci che esca dai bordi */
             margin: 0 auto;
-            max-width: 100%;
           }
         }
       `}</style>
