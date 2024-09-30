@@ -70,76 +70,78 @@ export default function Chatbot() {
       </div>
 
       {/* Finestra del chatbot */}
-      {isOpen && (
-        <div
-          className="fixed bottom-20 right-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50"
-          style={{ left: "auto", right: "4px" }} // Desktop, chat in basso a destra
-        >
-          <div className="p-4 border-b">
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-bold">Assistente Virtuale</h2>
-              <button
-                onClick={toggleChat}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                ✖
-              </button>
-            </div>
-          </div>
-
-          <div className="p-4">
-            <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll">
-              {/* Visualizzazione dei messaggi */}
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`mb-2 ${message.sender === "user" ? "text-right" : ""}`}
-                >
-                  <p
-                    className={`text-gray-700 ${
-                      message.sender === "bot" ? "text-left" : "text-right"
-                    }`}
-                  >
-                    {message.text}
-                  </p>
-                  <p className="text-xs text-gray-500">{message.time}</p>
-                </div>
-              ))}
-              {isTyping && (
-                <div className="text-left text-gray-500 text-xs mb-2">
-                  Il bot sta scrivendo...
-                </div>
-              )}
-            </div>
-
-            <input
-              type="text"
-              placeholder="Scrivi un messaggio..."
-              className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-            />
+      <div
+        className={`fixed bottom-20 right-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${
+          isOpen ? "scale-100" : "scale-0"
+        }`}
+        style={{ left: "auto", right: "4px" }} // Desktop, chat in basso a destra
+      >
+        <div className="p-4 border-b">
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg font-bold">Assistente Virtuale</h2>
             <button
-              className="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700 transition-colors"
-              onClick={handleSendMessage}
+              onClick={toggleChat}
+              className="text-gray-400 hover:text-gray-600"
             >
-              Invia
+              ✖
             </button>
           </div>
         </div>
-      )}
+
+        <div className="p-4">
+          <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll">
+            {/* Visualizzazione dei messaggi */}
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`mb-2 ${
+                  message.sender === "user" ? "text-right" : ""
+                }`}
+              >
+                <p
+                  className={`text-gray-700 ${
+                    message.sender === "bot" ? "text-left" : "text-right"
+                  }`}
+                >
+                  {message.text}
+                </p>
+                <p className="text-xs text-gray-500">{message.time}</p>
+              </div>
+            ))}
+            {isTyping && (
+              <div className="text-left text-gray-500 text-xs mb-2">
+                Il bot sta scrivendo...
+              </div>
+            )}
+          </div>
+
+          <input
+            type="text"
+            placeholder="Scrivi un messaggio..."
+            className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+          />
+          <button
+            className="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700 transition-colors"
+            onClick={handleSendMessage}
+          >
+            Invia
+          </button>
+        </div>
+      </div>
+
       {/* Responsive CSS */}
       <style jsx>{`
         @media (max-width: 640px) {
-          div.fixed {
-            right: 4px; /* Mantieni il pulsante tondo in basso a destra */
-          }
           div.fixed + div { /* Finestra del chatbot quando aperta */
             bottom: 0;
             left: 0;
             right: 0;
             max-width: 95%; /* Impedisci che esca dai bordi */
             margin: 0 auto;
+            transform: ${isOpen ? "scale(1)" : "scale(0)"};
+            transition: transform 0.3s ease-in-out;
           }
         }
       `}</style>
