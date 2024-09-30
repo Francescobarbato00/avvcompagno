@@ -10,10 +10,8 @@ export default function Header() {
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center p-4">
         {/* Logo - Collegamento alla home */}
         <div className="flex items-center">
-          <Link href="/" legacyBehavior>
-            <a>
-              <img src="/logo.png" alt="Logo" className="h-12 w-auto mr-4" />
-            </a>
+          <Link href="/">
+            <img src="/logo.png" alt="Logo" className="h-12 w-auto mr-4" />
           </Link>
         </div>
 
@@ -29,31 +27,31 @@ export default function Header() {
         <nav className={`md:flex md:space-x-8 md:items-center ${menuOpen ? 'block' : 'hidden'} mt-4 md:mt-0`}>
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-gray-800 justify-center">
             <li className="uppercase text-sm font-light">
-              <Link href="/aboutus" legacyBehavior>
-                <a className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
+              <Link href="/aboutus">
+                <span className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
                   Chi Siamo
-                </a>
+                </span>
               </Link>
             </li>
             <li className="uppercase text-sm font-light">
-              <Link href="/services" legacyBehavior>
-                <a className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
+              <Link href="/services">
+                <span className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
                   Servizi
-                </a>
+                </span>
               </Link>
             </li>
             <li className="uppercase text-sm font-light">
-              <Link href="/blog" legacyBehavior>
-                <a className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
+              <Link href="/blog">
+                <span className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
                   Blog
-                </a>
+                </span>
               </Link>
             </li>
             <li className="uppercase text-sm font-light">
-              <Link href="/contact" legacyBehavior>
-                <a className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
+              <Link href="/contact">
+                <span className="relative hover:text-red-600 hover:after:content-[''] hover:after:absolute hover:after:bg-red-600 hover:after:h-[2px] hover:after:w-full hover:after:left-0 hover:after:bottom-[-2px] hover:after:transition-all">
                   Contatti
-                </a>
+                </span>
               </Link>
             </li>
           </ul>
