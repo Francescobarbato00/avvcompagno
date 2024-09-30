@@ -78,7 +78,7 @@ export default function Chatbot() {
           style={{ left: "auto", right: "4px" }}
         >
           {/* Barra superiore della chat */}
-          <div className="p-4 bg-blue-500 rounded-t-lg flex justify-between items-center">
+          <div className="p-4 bg-red-600 rounded-t-lg flex justify-between items-center">
             <h2 className="text-white text-lg font-bold">Assistente Virtuale</h2>
             <button
               onClick={toggleChat}
@@ -103,7 +103,7 @@ export default function Chatbot() {
                     className={`inline-block rounded-lg p-2 ${
                       message.sender === "bot"
                         ? "bg-gray-200 text-left"
-                        : "bg-blue-500 text-white"
+                        : "bg-red-600 text-white"
                     }`}
                   >
                     <p>{message.text}</p>
@@ -123,27 +123,17 @@ export default function Chatbot() {
               <input
                 type="text"
                 placeholder="Scrivi un messaggio..."
-                className="w-full p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-red-600"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
               />
               <button
-                className="bg-blue-500 text-white p-2 rounded-r-lg hover:bg-blue-600 transition-colors"
+                className="bg-red-600 text-white p-2 rounded-r-lg hover:bg-red-700 transition-colors"
                 onClick={handleSendMessage}
               >
                 Invia
               </button>
             </div>
-          </div>
-
-          {/* Pulsanti di azione */}
-          <div className="p-4 flex justify-center space-x-4">
-            <button className="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">
-              Programma 4 ottobre
-            </button>
-            <button className="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">
-              Programma 5 ottobre
-            </button>
           </div>
         </div>
       )}
