@@ -70,81 +70,83 @@ export default function Chatbot() {
       </div>
 
       {/* Finestra del chatbot */}
-      <div
-        className={`fixed bg-white rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${
-          isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
-        } ${isOpen ? "bottom-0 left-0 right-0 top-0" : "bottom-20 right-4"} w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl`}
-        style={isOpen ? { left: "auto", right: "4px" } : {}}
-      >
-        <div className="p-4 border-b">
-          <div className="flex justify-between items-center">
-            <h2 className="text-lg font-bold">Assistente Virtuale</h2>
+      {isOpen && (
+        <div
+          className={`fixed bottom-0 right-0 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${
+            isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
+          }`}
+          style={{ left: "auto", right: "4px" }}
+        >
+          {/* Barra superiore della chat */}
+          <div className="p-4 bg-blue-500 rounded-t-lg flex justify-between items-center">
+            <h2 className="text-white text-lg font-bold">Assistente Virtuale</h2>
             <button
               onClick={toggleChat}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-white hover:text-gray-300"
             >
               ✖
             </button>
           </div>
-        </div>
 
-        <div className="p-4 flex-grow flex flex-col">
-          <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll flex-grow">
-            {/* Visualizzazione dei messaggi */}
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`mb-2 ${
-                  message.sender === "user" ? "text-right" : ""
-                }`}
-              >
-                <p
-                  className={`text-gray-700 ${
-                    message.sender === "bot" ? "text-left" : "text-right"
+          {/* Corpo della chat */}
+          <div className="p-4 flex-grow flex flex-col">
+            <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll flex-grow">
+              {/* Visualizzazione dei messaggi */}
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`mb-2 ${
+                    message.sender === "user" ? "text-right" : "text-left"
                   }`}
                 >
-                  {message.text}
-                </p>
-                <p className="text-xs text-gray-500">{message.time}</p>
-              </div>
-            ))}
-            {isTyping && (
-              <div className="text-left text-gray-500 text-xs mb-2">
-                Il bot sta scrivendo...
-              </div>
-            )}
+                  <div
+                    className={`inline-block rounded-lg p-2 ${
+                      message.sender === "bot"
+                        ? "bg-gray-200 text-left"
+                        : "bg-blue-500 text-white"
+                    }`}
+                  >
+                    <p>{message.text}</p>
+                    <p className="text-xs text-gray-500">{message.time}</p>
+                  </div>
+                </div>
+              ))}
+              {isTyping && (
+                <div className="text-left text-gray-500 text-xs mb-2">
+                  Il bot sta scrivendo...
+                </div>
+              )}
+            </div>
+
+            {/* Input messaggio */}
+            <div className="flex items-center">
+              <input
+                type="text"
+                placeholder="Scrivi un messaggio..."
+                className="w-full p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+              />
+              <button
+                className="bg-blue-500 text-white p-2 rounded-r-lg hover:bg-blue-600 transition-colors"
+                onClick={handleSendMessage}
+              >
+                Invia
+              </button>
+            </div>
           </div>
 
-          <input
-            type="text"
-            placeholder="Scrivi un messaggio..."
-            className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-          />
-          <button
-            className="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700 transition-colors"
-            onClick={handleSendMessage}
-          >
-            Invia
-          </button>
+          {/* Pulsanti di azione */}
+          <div className="p-4 flex justify-center space-x-4">
+            <button className="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">
+              Programma 4 ottobre
+            </button>
+            <button className="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">
+              Programma 5 ottobre
+            </button>
+          </div>
         </div>
-      </div>
-
-      {/* Responsive CSS */}
-      <style jsx>{`
-        @media (max-width: 640px) {
-          div.fixed + div { /* Finestra del chatbot a tutto schermo su mobile */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            max-width: 100%;
-            height: 100%;
-            margin: 0;
-          }
-        }
-      `}</style>
+      )}
     </div>
   );
 }
