@@ -71,10 +71,10 @@ export default function Chatbot() {
 
       {/* Finestra del chatbot */}
       <div
-        className={`fixed bottom-20 right-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${
-          isOpen ? "scale-100" : "scale-0"
-        }`}
-        style={{ left: "auto", right: "4px" }} // Desktop, chat in basso a destra
+        className={`fixed bg-white rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${
+          isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
+        } ${isOpen ? "bottom-0 left-0 right-0 top-0" : "bottom-20 right-4"} w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl`}
+        style={isOpen ? { left: "auto", right: "4px" } : {}}
       >
         <div className="p-4 border-b">
           <div className="flex justify-between items-center">
@@ -88,8 +88,8 @@ export default function Chatbot() {
           </div>
         </div>
 
-        <div className="p-4">
-          <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll">
+        <div className="p-4 flex-grow flex flex-col">
+          <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll flex-grow">
             {/* Visualizzazione dei messaggi */}
             {messages.map((message, index) => (
               <div
@@ -134,14 +134,14 @@ export default function Chatbot() {
       {/* Responsive CSS */}
       <style jsx>{`
         @media (max-width: 640px) {
-          div.fixed + div { /* Finestra del chatbot quando aperta */
-            bottom: 0;
+          div.fixed + div { /* Finestra del chatbot a tutto schermo su mobile */
+            top: 0;
             left: 0;
             right: 0;
-            max-width: 95%; /* Impedisci che esca dai bordi */
-            margin: 0 auto;
-            transform: ${isOpen ? "scale(1)" : "scale(0)"};
-            transition: transform 0.3s ease-in-out;
+            bottom: 0;
+            max-width: 100%;
+            height: 100%;
+            margin: 0;
           }
         }
       `}</style>
