@@ -11,7 +11,11 @@ export default function Header() {
         {/* Logo - Collegamento alla home */}
         <div className="flex items-center">
           <Link href="/">
-            <img src="/logo.png" alt="Logo" className="h-12 w-auto mr-4" />
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="h-12 w-auto mr-4 transition-transform duration-300 ease-in-out transform hover:scale-110"  // Qui aggiungiamo l'effetto di movimento
+            />
           </Link>
         </div>
 
