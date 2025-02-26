@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 // Articoli di esempio
 const articles = [
@@ -56,19 +57,30 @@ const articles = [
       "Le startup innovative potranno accedere a nuovi fondi e agevolazioni fiscali nel 2024.",
     date: "5 Settembre 2024",
   },
-  
 ];
 
 const ArticleSection = () => {
   return (
     <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-10">Ultime Notizie</h2>
+        <motion.h2
+          className="text-3xl font-bold text-center mb-10"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.8 }}
+        >
+          Ultime Notizie
+        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.map((article, index) => (
-            <div
+            <motion.div
               key={index}
               className="bg-white p-6 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
             >
               <span className="text-sm font-bold text-red-600 uppercase">
                 Articoli
@@ -80,7 +92,7 @@ const ArticleSection = () => {
                 {article.description}
               </p>
               <p className="text-gray-500 text-xs">{article.date}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
