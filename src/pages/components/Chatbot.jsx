@@ -1,142 +1,221 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { FiMessageSquare, FiX } from "react-icons/fi";
 
-export default function Chatbot() {
+const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
+  const [messages, setMessages] = useState([
+    { id: 1, text: "Benvenuto! Di cosa hai bisogno oggi?", sender: "bot" },
+  ]);
+  const [isMobile, setIsMobile] = useState(false);
+  const chatContainerRef = useRef(null);
 
-  // Funzione per aprire e chiudere la finestra di chat
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // Funzione per ottenere l'orario attuale in formato HH:MM
-  const getCurrentTime = () => {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  };
-
-  // Funzione per aggiungere il messaggio dell'utente e la risposta del bot
-  const handleSendMessage = () => {
-    if (inputMessage.trim() === "") return; // Non inviare messaggi vuoti
-
-    // Aggiungi il messaggio dell'utente
-    const userMessage = {
-      text: inputMessage,
-      time: getCurrentTime(),
-      sender: "user",
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
     };
 
-    setMessages([...messages, userMessage]);
-    setInputMessage("");
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
-    // Simula che il bot sta scrivendo
-    setIsTyping(true);
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
 
-    // Simula una risposta del bot con un leggero ritardo
-    setTimeout(() => {
-      const botResponse = {
-        text: "Sto elaborando la tua richiesta. Ti risponderemo al più presto.",
-        time: getCurrentTime(),
-        sender: "bot",
-      };
-      setMessages((prevMessages) => [...prevMessages, botResponse]);
-      setIsTyping(false); // Fine effetto typing
-    }, 2000); // Simula un tempo di attesa per la risposta del bot
+  useEffect(() => {
+    if (isMobile && isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen, isMobile]);
+
+  const toggleChat = () => setIsOpen((prev) => !prev);
+
+  const sendMessage = (message) => {
+    if (message.trim()) {
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now(), text: message, sender: "user" },
+      ]);
+      setTimeout(() => {
+        const botReply = getBotReply(message);
+        if (botReply) {
+          setMessages((prev) => [
+            ...prev,
+            { id: Date.now() + 1, text: botReply, sender: "bot" },
+          ]);
+        }
+      }, 1000);
+    }
+  };
+
+  const getBotReply = (message) => {
+    const lowerMessage = message.toLowerCase();
+    if (lowerMessage.includes("servizi")) {
+      return "Offriamo consulenza legale, supporto nelle controversie e soluzioni personalizzate per le aziende.";
+    }
+    if (lowerMessage.includes("operiamo")) {
+      return "Operiamo principalmente a Roma e Milano, con progetti in tutta Italia.";
+    }
+    if (lowerMessage.includes("contattaci")) {
+      return "Puoi contattarci al numero 06 12345678 oppure via email a info@studiolegale.it.";
+    }
+    return "Grazie per il tuo messaggio. Ti risponderemo al più presto!";
   };
 
   return (
-    <div>
-      {/* Icona del chatbot */}
-      <div
-        className="fixed bottom-8 right-8 md:bottom-4 md:right-4 bg-red-600 text-white rounded-full p-4 shadow-lg cursor-pointer z-50"
-        onClick={toggleChat}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+    <>
+      {/* Bottone per aprire la chat */}
+      <div className="fixed bottom-6 right-6 z-[100]">
+        <button
+          onClick={toggleChat}
+          className="bg-red-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-xl hover:bg-red-700 transition duration-300"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7l-4 4V10a2 2 0 012-2h2M14 4h4m-2-2v4M4 12h12"
-          />
-        </svg>
+          {isOpen ? <FiX size={28} /> : <FiMessageSquare size={28} />}
+        </button>
       </div>
 
-      {/* Finestra del chatbot */}
+      {/* Overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-10 z-[99] animate-fadeInOverlay"></div>
+      )}
+
+      {/* Finestra della chat */}
       {isOpen && (
         <div
-          className={`fixed bottom-0 right-0 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out transform ${
-            isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
+          className={`fixed ${
+            isMobile
+              ? "inset-0 w-full h-full" // FULLSCREEN su Mobile
+              : "bottom-20 right-6 w-[300px] h-[350px]" // COMPATTA su Desktop
+          } rounded-lg bg-white shadow-lg flex flex-col z-[100] transition-all duration-500 ${
+            isMobile ? "animate-fadeInMobile" : "animate-slideInUp"
           }`}
-          style={{ left: "auto", right: "4px" }}
         >
-          {/* Barra superiore della chat */}
-          <div className="p-4 bg-red-600 rounded-t-lg flex justify-between items-center">
-            <h2 className="text-white text-lg font-bold">Assistente Virtuale</h2>
-            <button
-              onClick={toggleChat}
-              className="text-white hover:text-gray-300"
-            >
-              ✖
+          {/* Header della chat */}
+          <div className="bg-red-600 text-white p-3 flex justify-between items-center rounded-t-lg">
+            <h3 className="text-md font-semibold">ChatBot</h3>
+            <button onClick={toggleChat} className="hover:opacity-80 transition">
+              <FiX size={24} />
             </button>
           </div>
 
-          {/* Corpo della chat */}
-          <div className="p-4 flex-grow flex flex-col">
-            <div className="h-64 sm:h-72 md:h-80 bg-gray-100 rounded-lg mb-4 p-2 overflow-y-scroll flex-grow">
-              {/* Visualizzazione dei messaggi */}
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`mb-2 ${
-                    message.sender === "user" ? "text-right" : "text-left"
-                  }`}
-                >
-                  <div
-                    className={`inline-block rounded-lg p-2 ${
-                      message.sender === "bot"
-                        ? "bg-gray-200 text-left"
-                        : "bg-red-600 text-white"
-                    }`}
-                  >
-                    <p>{message.text}</p>
-                    <p className="text-xs text-gray-500">{message.time}</p>
-                  </div>
-                </div>
-              ))}
-              {isTyping && (
-                <div className="text-left text-gray-500 text-xs mb-2">
-                  Il bot sta scrivendo...
-                </div>
-              )}
-            </div>
-
-            {/* Input messaggio */}
-            <div className="flex items-center">
-              <input
-                type="text"
-                placeholder="Scrivi un messaggio..."
-                className="w-full p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-              />
-              <button
-                className="bg-red-600 text-white p-2 rounded-r-lg hover:bg-red-700 transition-colors"
-                onClick={handleSendMessage}
+          {/* Contenitore dei messaggi */}
+          <div
+            ref={chatContainerRef}
+            className="flex-1 p-3 overflow-y-auto bg-gray-100 text-sm"
+            style={{
+              maxHeight: isMobile ? "calc(100% - 100px)" : "calc(100% - 80px)",
+              scrollbarWidth: "thin",
+              scrollbarColor: "#999 #f1f1f1",
+            }}
+          >
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`mb-3 flex ${
+                  msg.sender === "user" ? "justify-end" : "justify-start"
+                }`}
               >
-                Invia
-              </button>
-            </div>
+                <div
+                  className={`p-2 rounded-md max-w-xs shadow-sm ${
+                    msg.sender === "user"
+                      ? "bg-red-600 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  } text-sm`}
+                >
+                  {msg.text}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottoni per domande rapide */}
+          <div className="p-3 border-t border-gray-300 bg-white flex justify-center gap-2 flex-wrap">
+            <button
+              onClick={() => sendMessage("I nostri servizi?")}
+              className="bg-red-500 text-white px-3 py-2 rounded-full text-sm hover:bg-red-600 transition"
+            >
+              Servizi
+            </button>
+            <button
+              onClick={() => sendMessage("Dove operiamo?")}
+              className="bg-red-500 text-white px-3 py-2 rounded-full text-sm hover:bg-red-600 transition"
+            >
+              Sede
+            </button>
+            <button
+              onClick={() => sendMessage("Come contattarci?")}
+              className="bg-red-500 text-white px-3 py-2 rounded-full text-sm hover:bg-red-600 transition"
+            >
+              Contattaci
+            </button>
           </div>
         </div>
       )}
-    </div>
+
+      {/* Animazioni e personalizzazioni scrollbar */}
+      <style jsx>{`
+        @keyframes fadeInOverlay {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes slideInUp {
+          from {
+            transform: translateY(50px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        @keyframes fadeInMobile {
+          from {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        .animate-fadeInOverlay {
+          animation: fadeInOverlay 0.2s ease-in-out forwards;
+        }
+        .animate-slideInUp {
+          animation: slideInUp 0.3s ease-out forwards;
+        }
+        .animate-fadeInMobile {
+          animation: fadeInMobile 0.4s ease-out forwards;
+        }
+        ::-webkit-scrollbar {
+          width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #999;
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+      `}</style>
+    </>
   );
-}
+};
+
+export default ChatBot;

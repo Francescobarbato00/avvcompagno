@@ -20,7 +20,7 @@ export default function ContactSection() {
               Tel: <a href="tel:+ 0677204459" className="text-red-600 underline">+0677204459</a>
             </p>
             <p className="text-base font-light text-gray-800 mb-4">
-              E-mail: <a href="mailto:info@stefanoberardi.com" className="text-red-600 underline">info@stefanoberardi.com</a>
+              E-mail: <a href="mailto:avvocatodanielacompagno@gmail.com" className="text-red-600 underline">avvocatodanielacompagno@gmail.com</a>
             </p>
           </div>
 

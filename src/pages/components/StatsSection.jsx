@@ -4,8 +4,8 @@ export default function StatsSection() {
       {/* Testo introduttivo */}
       <div className="container mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
         <h2 className="text-xl sm:text-2xl font-serif font-light leading-relaxed mb-4 sm:mb-6">
-          Negli ultimi dieci anni Berardi Stefano <br className="hidden sm:inline" />
-          avvocati tributaristi ha patrocinato molteplici <br className="hidden sm:inline" />
+          Negli ultimi dieci anni Compagno Daniela <br className="hidden sm:inline" />
+          avvocato ha patrocinato molteplici <br className="hidden sm:inline" />
           ed importanti giudizi
         </h2>
       </div>

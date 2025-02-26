@@ -2,7 +2,7 @@ import AboutSection from './components/AboutSection';
 import Header from './components/Header';
 import Home from './components/Home';
 import AreeAttivita from './components/AreeAttivita';
-import TeamSection from './components/TeamSection';
+import TeamSection from './components/Team';
 import StatsSection from './components/StatsSection';
 import NewsSection from './components/NewsSection';
 import NewsletterSection from './components/NewsletterSection';
