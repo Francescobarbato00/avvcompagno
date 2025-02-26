@@ -9,8 +9,8 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600 space-y-4 sm:space-y-0">
           {/* Informazioni studio legale */}
           <div className="text-center sm:text-left">
-            <p>Studio Avvocato Stefano Berardi – Studio legale notarile</p>
-            <p>Sede: Via Roma, 16</p>
+            <p>Studio legale Daniela Compagno</p>
+            <p>Via Taranto, 95/LT. D 00182 ROMA (RM)</p>
           </div>
 
           {/* Link Privacy e Credits */}

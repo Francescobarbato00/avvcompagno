@@ -56,81 +56,36 @@ const articles = [
       "Le startup innovative potranno accedere a nuovi fondi e agevolazioni fiscali nel 2024.",
     date: "5 Settembre 2024",
   },
-  {
-    title: "Modifiche alle normative sul commercio estero",
-    description:
-      "Le nuove regolamentazioni agevolano l'import-export con riduzioni dei dazi doganali.",
-    date: "4 Settembre 2024",
-  },
-  {
-    title: "Nuovi incentivi per la digitalizzazione",
-    description:
-      "L'iniziativa governativa per la digitalizzazione delle imprese prevede contributi a fondo perduto.",
-    date: "3 Settembre 2024",
-  },
-  {
-    title: "Aggiornamenti sul codice del lavoro",
-    description:
-      "Le modifiche al codice del lavoro prevedono nuove tutele per i lavoratori in smart working.",
-    date: "2 Settembre 2024",
-  },
+  
 ];
 
 const ArticleSection = () => {
   return (
-    <div style={styles.gridContainer}>
-      {articles.map((article, index) => (
-        <div key={index} style={styles.card}>
-          <span style={styles.articleType}>Articoli</span>
-          <h3 style={styles.title}>{article.title}</h3>
-          <p style={styles.description}>{article.description}</p>
-          <p style={styles.date}>{article.date}</p>
+    <section className="py-12 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-10">Ultime Notizie</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map((article, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
+              <span className="text-sm font-bold text-red-600 uppercase">
+                Articoli
+              </span>
+              <h3 className="text-xl font-semibold mt-2 mb-4">
+                {article.title}
+              </h3>
+              <p className="text-gray-700 text-sm mb-4">
+                {article.description}
+              </p>
+              <p className="text-gray-500 text-xs">{article.date}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
-};
-
-const styles = {
-  gridContainer: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', // Adatta le colonne automaticamente
-    gridGap: '20px', // Spaziatura tra le card
-    padding: '20px', // Padding ridotto su mobile
-  },
-  card: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-    borderRadius: '5px',
-    border: '1px solid #e6e6e6',
-    textAlign: 'left',
-    transition: 'box-shadow 0.3s ease',
-  },
-  articleType: {
-    color: '#D9534F',
-    fontSize: '14px',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    marginBottom: '10px',
-  },
-  title: {
-    fontSize: '20px', // Riduzione della dimensione del titolo
-    margin: '10px 0',
-    fontWeight: '600',
-    lineHeight: '1.4',
-  },
-  description: {
-    fontSize: '14px', // Riduzione della dimensione della descrizione
-    margin: '10px 0',
-    color: '#333',
-    lineHeight: '1.6',
-  },
-  date: {
-    fontSize: '12px', // Riduzione della dimensione della data
-    color: '#888',
-    marginTop: '10px',
-  },
 };
 
 export default ArticleSection;

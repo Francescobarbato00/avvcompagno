@@ -12,12 +12,12 @@ export default function ContactSection() {
           <div className="md:w-1/3 mb-8 md:mb-0">
             <h3 className="text-red-600 uppercase text-sm mb-2 tracking-wider">Sede</h3>
             <p className="text-base font-light text-gray-800 mb-6">
-              Via Roma, 16, Roma
+            Via Taranto, 95 LT. D - 00195 ROMA - LAZIO
             </p>
 
             <h3 className="text-red-600 uppercase text-sm mb-2 tracking-wider">Contatti</h3>
             <p className="text-base font-light text-gray-800 mb-4">
-              Tel: <a href="tel:+39xxxxxxxxxx" className="text-red-600 underline">+39 xxx xxx xxxx</a>
+              Tel: <a href="tel:+ 0677204459" className="text-red-600 underline">+0677204459</a>
             </p>
             <p className="text-base font-light text-gray-800 mb-4">
               E-mail: <a href="mailto:info@stefanoberardi.com" className="text-red-600 underline">info@stefanoberardi.com</a>
