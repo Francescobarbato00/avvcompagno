@@ -1,6 +1,38 @@
+import React, { useEffect, useState, useRef } from 'react';
+
 export default function AreeAttivita() {
+  const [animate, setAnimate] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimate(true);
+          observer.disconnect(); // Una volta attivata, disconnettiamo l'observer
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section className="relative py-8 sm:py-16 bg-white overflow-hidden">
+    <section
+      ref={sectionRef}
+      className={`relative py-8 sm:py-16 bg-white overflow-hidden transition-all duration-500 ${
+        animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       {/* Testo Scorrevole in Background */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 z-0">
         <div className="animate-scroll">
@@ -21,7 +53,9 @@ export default function AreeAttivita() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
-            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">
+              Persone fisiche: tassazione reddito
+            </h3>
             <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
               Scopri di più <span className="ml-2">&rsaquo;</span>
             </a>
@@ -30,7 +64,9 @@ export default function AreeAttivita() {
 
           {/* Ripeti per le altre card */}
           <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
-            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">
+              Persone fisiche: tassazione reddito
+            </h3>
             <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
               Scopri di più <span className="ml-2">&rsaquo;</span>
             </a>
@@ -38,7 +74,9 @@ export default function AreeAttivita() {
           </div>
 
           <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
-            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">
+              Persone fisiche: tassazione reddito
+            </h3>
             <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
               Scopri di più <span className="ml-2">&rsaquo;</span>
             </a>
@@ -46,7 +84,9 @@ export default function AreeAttivita() {
           </div>
 
           <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
-            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">
+              Persone fisiche: tassazione reddito
+            </h3>
             <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
               Scopri di più <span className="ml-2">&rsaquo;</span>
             </a>
@@ -54,7 +94,9 @@ export default function AreeAttivita() {
           </div>
 
           <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
-            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">
+              Persone fisiche: tassazione reddito
+            </h3>
             <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
               Scopri di più <span className="ml-2">&rsaquo;</span>
             </a>
@@ -62,14 +104,14 @@ export default function AreeAttivita() {
           </div>
 
           <div className="bg-gray-100 p-6 sm:p-8 relative hover:shadow-lg">
-            <h3 className="text-xl sm:text-2xl font-serif mb-4">Persone fisiche: tassazione reddito</h3>
+            <h3 className="text-xl sm:text-2xl font-serif mb-4">
+              Persone fisiche: tassazione reddito
+            </h3>
             <a href="#" className="text-gray-800 flex items-center hover:text-red-600">
               Scopri di più <span className="ml-2">&rsaquo;</span>
             </a>
             <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600"></div>
           </div>
-          
-          {/* Puoi aggiungere tutte le altre card con lo stesso pattern */}
         </div>
 
         {/* Link per visualizzare tutte le aree */}
